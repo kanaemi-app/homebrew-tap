@@ -1,0 +1,25 @@
+name: Update
+
+# Kanaemi's release runs this once the release holds the app, so the cask
+# names the latest one.
+on:
+  workflow_dispatch:
+
+permissions:
+  contents: write
+
+jobs:
+  cask:
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v7.0.1
+      - run: ./update-cask.sh
+        env:
+          GH_TOKEN: ${{ github.token }}
+      - name: Commit the cask
+        run: |
+          git config user.name "github-actions[bot]"
+          git config user.email "41898282+github-actions[bot]@users.noreply.github.com"
+          git add Casks/kanaemi.rb
+          git diff --cached --quiet || git commit -m "kanaemi $(perl -ne 'print $1 if /^  version "(.+)"/' Casks/kanaemi.rb)"
+          git push
