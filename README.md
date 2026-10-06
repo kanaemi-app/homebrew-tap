@@ -6,7 +6,11 @@
 brew install --cask kanaemi-app/tap/kanaemi
 ```
 
-入れたあと、システム設定の「キーボード」の「入力ソース」で Kanaemi を足してください。一覧に出てこないときは、一度ログアウトしてログインし直してください。
+入れたあと、システム設定の「キーボード」の「入力ソース」で Kanaemi を足してください。一覧に出てこないときは、システム設定を終了し、入力ソースの一覧のキャッシュを消してから開き直してください。管理者の権限もログアウトも要りません。
+
+```sh
+rm "$(getconf DARWIN_USER_CACHE_DIR)"/com.apple.IntlDataCache.le*
+```
 
 ## インストーラーで入れた Kanaemi から乗り換える
 

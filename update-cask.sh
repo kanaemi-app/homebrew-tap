@@ -61,10 +61,13 @@ cask "kanaemi" do
   ]
 
   # System Settings lists input sources from a cache that does not notice a
-  # newly installed one, and where that cache lives is known only when it runs.
+  # newly installed one. The installer package removes it, but install steps
+  # run in a sandbox that may not write where the cache lives.
   caveats <<~EOS
     Add Kanaemi in System Settings > Keyboard > Input Sources.
-    If it is not listed there, log out and log in again.
+    If it is not listed there, quit System Settings, remove the cache of the list,
+    and open System Settings again:
+      rm "\$(getconf DARWIN_USER_CACHE_DIR)"/com.apple.IntlDataCache.le*
   EOS
 end
 RUBY
