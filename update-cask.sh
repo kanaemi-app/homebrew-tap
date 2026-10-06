@@ -10,8 +10,9 @@ root="$(cd "$(dirname "$0")" && pwd)"
 work="$(mktemp -d)"
 trap 'rm -rf "$work"' EXIT
 
-gh release download "$tag" --repo kanaemi-app/kanaemi --pattern "Kanaemi-$version.zip" --dir "$work"
-sha256="$(sha256sum "$work/Kanaemi-$version.zip" | cut -d' ' -f1)"
+zip="Kanaemi-$version-macos-arm64.zip"
+gh release download "$tag" --repo kanaemi-app/kanaemi --pattern "$zip" --dir "$work"
+sha256="$(sha256sum "$work/$zip" | cut -d' ' -f1)"
 
 mkdir -p "$root/Casks"
 cat >"$root/Casks/kanaemi.rb" <<RUBY
@@ -19,7 +20,7 @@ cask "kanaemi" do
   version "$version"
   sha256 "$sha256"
 
-  url "https://github.com/kanaemi-app/kanaemi/releases/download/v#{version}/Kanaemi-#{version}.zip"
+  url "https://github.com/kanaemi-app/kanaemi/releases/download/v#{version}/Kanaemi-#{version}-macos-arm64.zip"
   name "Kanaemi"
   desc "Japanese input method based on SKK"
   homepage "https://kanaemi-app.github.io/"
