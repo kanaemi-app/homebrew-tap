@@ -1,6 +1,6 @@
 cask "kanaemi" do
-  version "0.10.0"
-  sha256 "aa289fc7fa02d77736e27eea84bd77a432bbfca65229e5009754e6a18151e780"
+  version "0.10.1"
+  sha256 "88bc761b2b5b7ed92930ac0fc68f9da35d316e2af5a113b4942adc762ddf7d44"
 
   url "https://github.com/kanaemi-app/kanaemi/releases/download/v#{version}/Kanaemi-#{version}-macos-arm64.zip"
   name "Kanaemi"
